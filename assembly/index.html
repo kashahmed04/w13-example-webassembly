@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<script type="module">
-import { findNthPrime } from "./build/release.js";
-document.body.innerText = findNthPrime(4);
-</script>
-</head>
-<body></body>
+  <head>
+    <script type="module">
+      import { findNthPrime } from './build/release.js';
+      document.body.innerText = findNthPrime(4);
+    </script>
+  </head>
+  <body></body>
 </html>
+
+<!--shows the non-vite way of running this (import findnthprime from release.js (eveyrthing we need for the release))
+    (before in main we just imported
+    the web assembly)-->
+<!--we need release.js to work in the browser and vite config has the wasm to let us use the code easily in the browser-->
