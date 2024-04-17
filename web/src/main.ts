@@ -68,10 +68,19 @@ runWWbutton.addEventListener('click', () => {
 //onmessage needs the event to listen back from the sender if we want to communicate in both directions but we don't need
 //it if we want to work in one single direction (send stuff and say do this and don't send anything back)
 //event.data is the string from worker 
+//so when the postmessage from the click event is done in worker.ts then we post a message then in main since we have an onmessage 
+//it gets that data and displays it (the event is the post message for main and worker)**
+//do we usually say event.data to get the data back and is it usually always used with postmessage and onmessage** 
+//what happens if we use event instead**
 worker.onmessage = (evt) => {
   wwOut.innerText = evt.data;
 };
 
+//for sparse arrays it's undefined right for the empty entries**
+//for storage slides for slide 2 these storage commands are only used for local storage and session storage right
+//because their keys can only be string (not used in indexDB because key can be any type and can have any number of values)**
+//for local and session storage can they only have 1 or multiple values per key**
+//go over slide 6 in web storage slides for indexed DB with keys and rows**
 
 /**
  * NEW NOTES:
@@ -85,10 +94,14 @@ worker.onmessage = (evt) => {
  * binary format and sent to the browser automatically
  * JS is interpreted that means we feed to program to the browser and the browser figures out what happens based on what we put
  * (interpreted)
- * TS compiles
- * and web assembly runs directly with rules we set in binary (compiles to JS then JS is interpreted by the browser)
+ * and web assembly runs directly with rules we set in binary (compiles because it knows what to do already (we gave it directions
+ * in machine readable format already so it knows what to do but in JS we did not so it has to be interpreted into machine readable
+ * code then can do the things in the browser based on the code or return an error if something is wrong))**
+ * what if it does not compile for web assembly since it does not have a chance to interpret the code to see if there is an error
+ * like it does for JS**
+ * (TS compiles to JS then JS is interpreted by the browser)**
  * 
- * assembly means that code that runs at the processor level of a computer web assembly is similar but it has to run
+ * assembly means that code that runs at the processor level of a computer but web assembly is similar but it has to run
  * within the browser context not the processor level of a computer (lower level language rather than higher level language
  * because it gives machine level instructions instead of object oriented machine instructions)
  * 
@@ -99,6 +112,9 @@ worker.onmessage = (evt) => {
  * it's a near native performanace we can run on the web which means** (slide 2)**
  * what is a compilaton target** (slide 2)**
  * 
+ * web assembly is an API right** (same with web socket and web midi)** (anything that has web in it is an API right)**
+ * what API's have we worked with so far**
+ * 
  * web assembly can run with web assembley and JS can call web assembly things and web assembly things can call JS things** 
  * slide 2 last bullet** (how)**
  * 
@@ -107,6 +123,9 @@ worker.onmessage = (evt) => {
  * 
  * if we write in c or c++ we use emscipten to convert to web assembly or we 
  * could write it ourself in binary (machine level)** (slide 3)**
+ * 
+ * we can also go from TS directly to web assembly and not even to JS first** (how)** (slide 3)** (is this the same for
+ * other API's)** (does it not even interpret to web assembly code because it just says compiles on slide 3)**
  * 
  * we can write a rust applicaiton and can set web assembly as the target** (slide 3)**
  * 
@@ -139,7 +158,7 @@ worker.onmessage = (evt) => {
  * 
  * asynchronously means multiple threads and multiple operations happening at the same time (but in different threads)** but
  * synchronoulsy means to wait until this operation is done then do the rest of the code and operations right (usually all operations
- * happening on the main thread right for synchronous)** (slide 6)**
+ * happening on the main thread right for synchronous)** (this is true in general for synchronous and asynchronous right)** (slide 6)**
  * 
  * so just TS and just web assembly are synchronous (stops eveyrthing until one operation is done then moves on)**
  * whereas with the TS with web workers were asynchronous and ran multiple things at one time but each task
